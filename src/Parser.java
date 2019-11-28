@@ -1,9 +1,3 @@
-/*
-Fabio Silva Campos Melo
-Gustavo Lescowicz Kotarsky
-Lucas Dutra Ponce de Leon
-*/
-
 import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.io.BufferedReader;
 import java.io.FileReader;
