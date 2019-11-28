@@ -6,29 +6,37 @@ Lucas Dutra Ponce de Leon
 
 public class Simbolo {
 
-    private String lexema = "";
+
+    public String lexema = "";
     private byte token;
-    private String classe = "";
-    private String tipo = "";
+    public String classe = "";
+    public String tipo = "";
     private int tamanho = 0;
     private int endereco;
 
+
     public Simbolo(){
         this.token = -1;
+        this.tipo = "";
+        this.classe = "";
 
     }
 
     public Simbolo(String lexema, byte token) {
         this.lexema = lexema;
         this.token = token;
-        this.endereco = endereco;
+        this.tipo = tipo;
+        this.classe = "";
+
     }
 
     public Simbolo(String lexema,byte token, String tipo){
         this.token = token;
         this.lexema = lexema;
         this.tipo = tipo;
-        this.endereco = endereco;
+        this.classe = "";
+
+
     }
 
 

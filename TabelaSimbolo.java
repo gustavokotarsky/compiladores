@@ -86,7 +86,9 @@ public class TabelaSimbolo {
 
     public void mostrarTabelaDeSimbolo() {
         for (Simbolo simbolo : tabela.values()) {
-            System.out.println("Lexema: " + simbolo.getLexema() + " | Token: " + simbolo.getToken());
+            System.out.println("Lexema: " + simbolo.getLexema() + " | Token: " + simbolo.getToken() + " | Tipo: "+ simbolo.getTipo() +
+                    " | Classe: "+     simbolo.getClasse()) ;
+
         }
     }
 

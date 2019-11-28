@@ -30,8 +30,8 @@ public class AnalisadorLexico {
 
 
     //construtor
-    public AnalisadorLexico(BufferedReader bufferedReader) {
-        tabelaSimbolo = new TabelaSimbolo();
+    public AnalisadorLexico(BufferedReader bufferedReader, TabelaSimbolo tbSimbolo) {
+        tabelaSimbolo = tbSimbolo;
         _bufferedReader = bufferedReader;
         linha = 1;
         EOF = false;
@@ -45,7 +45,8 @@ public class AnalisadorLexico {
         lexema = "";
         int estado = 0;
         int estadoFinal = 9;
-
+        final  int a = 3;
+        int b = a+3;
 
         while (estado != estadoFinal) {
             switch (estado) {
@@ -114,30 +115,18 @@ public class AnalisadorLexico {
                 simbolo = tabelaSimbolo.buscarSimbolo(lexema);
 
                 //Se nao tiver tenta inserir
-
-                // tenta inserir constante byte
-            } else if (lexema.length() == 4 && lexema.charAt(0) == '0' && lexema.charAt(1) == 'h' &&
-                    Caracter.Hexadecimal(lexema.charAt(2)) && Caracter.Hexadecimal(lexema.charAt(3))) {
-                tipo = "byte";
-                simbolo = tabelaSimbolo.inserirConst(lexema, tipo);
-
                 // tenta inserir constante integer
             } else if (Caracter.Digito((lexema.charAt(0)))) {
-                //(lexema.charAt(0) == '-' && Caracter.Digito((lexema.charAt(1)))))
-                tipo = "integer";
                 simbolo = tabelaSimbolo.inserirConst(lexema, tipo);
 
                 // tenta inserir constante string
             } else if (lexema.charAt(0) == '\'' && lexema.charAt(lexema.length() - 1) == '\'') {
                 tipo = "string";
-                  /* String concat = lexema.substring(0, lexema.length() - 1);
-                concat += "$" + '\'';*/
                 String replace = lexema.replaceAll("\'\'", "\'");
                 simbolo = tabelaSimbolo.inserirConst(replace, tipo);
 
                 // tenta inserir constante boolean
-            } else if ((lexema.charAt(0) == 't' && lexema.charAt(1) == 'r' && lexema.charAt(2) == 'u' && lexema.charAt(3) == 'e')||
-                    (lexema.charAt(0) == 'f' && lexema.charAt(1) == 'a' && lexema.charAt(2) == 'l' && lexema.charAt(3) == 's' && lexema.charAt(4) == 'e')) {
+            } else if ("true".equals(lexema) || "false".equals(lexema)) {
                 tipo = "boolean";
                 simbolo = tabelaSimbolo.inserirConst(lexema, tipo);
 
@@ -159,8 +148,12 @@ public class AnalisadorLexico {
             if (devolver == false) {
                 charDevolvido = (char) _bufferedReader.read();
                 //System.out.println(((byte) charDevolvido));
+                if (charDevolvido == 10) {
+                    linha++;
+                }
             } else {
                 devolver = false;
+
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -174,7 +167,6 @@ public class AnalisadorLexico {
         char simbolo = lerChar();
 
         if (simbolo == 10) {
-            linha++;
             return 0;
 
         } else if (simbolo == 32 || simbolo == 11 || simbolo == 8 || simbolo == 13 || simbolo == 9) {
@@ -194,6 +186,7 @@ public class AnalisadorLexico {
             return 20;
 
         } else if (simbolo == '0') {
+            tipo = "integer";
             lexema += simbolo;
             return 1;
 
@@ -261,6 +254,7 @@ public class AnalisadorLexico {
         char simbolo = lerChar();
         if (Caracter.Hexadecimal(simbolo)) {
             lexema += simbolo;
+            tipo = "byte";
             return 9;
         }
         return error(simbolo);
@@ -283,8 +277,10 @@ public class AnalisadorLexico {
         char simbolo = lerChar();
         if (Caracter.Digito(simbolo)) {
             lexema += simbolo;
+            tipo = "integer";
             return 7;
         } else if (!(Caracter.Digito(simbolo))) {
+            tipo = "integer";
             devolver = true;
             return 9;
         }
@@ -382,7 +378,7 @@ public class AnalisadorLexico {
     private int estado18() {
         char simbolo = lerChar();
 
-        if(!(Caracter.CaracterValido(simbolo))){
+        if (!(Caracter.CaracterValido(simbolo))) {
             return error(simbolo);
         }
         if (simbolo == '*') {
@@ -420,18 +416,22 @@ public class AnalisadorLexico {
     public int error(char simbolo) {
         erroCompila = true;
         if (simbolo == Caracter.EOF) {
-            System.out.println(linha + ":fim de arquivo nao esperado.");
+            MensagemDeErro.Imprimir(linha,MensagemDeErro.FIM_ARQUIVO_NAO_ESPERADO,null);
+            //System.out.println(linha + ":fim de arquivo nao esperado.");
             EOF = true;
             return 9;
         }
         if (Caracter.CaracterValido(simbolo)) {
             if (simbolo == 13 || simbolo == 10) {
-                System.out.println(linha + ":lexema nao identificado" + " [/n].");
+               MensagemDeErro.Imprimir(linha,MensagemDeErro.LEXEMA_NAO_IDENTIFICADO,lexema);
+
+                //System.out.println(linha + ":lexema nao identificado" + "[" + lexema + "/n].");
             } else {
-                System.out.println(linha + ":lexema nao identificado" + " [" + simbolo + "].");
+                MensagemDeErro.Imprimir(linha,MensagemDeErro.LEXEMA_NAO_IDENTIFICADO,lexema);
             }
         } else
-            System.out.println(linha + ":caractere invalido.");
+            MensagemDeErro.Imprimir(linha,MensagemDeErro.CARACTERE_INVALIDO,null);
+          //  System.out.println(linha + ":caractere invalido.");
 
         return 9;
     }
