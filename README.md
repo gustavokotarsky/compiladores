@@ -13,3 +13,7 @@ Grupo:
 |   Analise Léxica/Sintática| 10| 10|
 |   Analise Semântica|  20| 20|
 
+
+Automato:
+
+<img src="https://github.com/gustavokotarsky/compiladores/blob/master/Automato.jpg?raw=true">
