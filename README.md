@@ -31,8 +31,8 @@ readln’(‘ id ’)’; |
 ##W -> begin {C} end | C
 
 
-<h3>EXP -></h3> EXPS [(==|!=|<|>|<=|>=) EXPS] 
-<h3>EXPS -></h3> [+|-] T {(+|-|or) T}
-<h3>T -></h3> F {(*|and|/) F}
-<h3>F -></h3> ‘(‘ EXP ’)’| id | v_const | not F
+<h3>EXP</h3>-> EXPS [(==|!=|<|>|<=|>=) EXPS] 
+<h3>EXPS</h3>-> [+|-] T {(+|-|or) T}
+<h3>T</h3>-> F {(*|and|/) F}
+<h3>F</h3>-> ‘(‘ EXP ’)’| id | v_const | not F
 
