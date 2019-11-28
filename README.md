@@ -21,8 +21,9 @@ Automato:
 Gramática:
 
  - __S__-> {D}+ main {C}+end
- - __D__-> (integer | boolean | byte | string) id [= [-]v_const] {,id [= [-]v_const]}; | const id = [-]v_const; - 
-__C__-> id = EXP;|
+ - __D__-> (integer | boolean | byte | string) id [= [-]v_const] {,id [= [-]v_const]}; |
+ const id = [-]v_const; 
+ - __C__-> id = EXP;|
 while ‘(‘ EXP ’)’ W |
 if ‘(‘EXP’)’ then ( C [else (W) ] | begin {C} end [else (W) ] ) |
 ; |
