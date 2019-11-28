@@ -1,9 +1,3 @@
-/*
-Fabio Silva Campos Melo
-Gustavo Lescowicz Kotarsky
-Lucas Dutra Ponce de Leon
-*/
-
 public class MensagemDeErro {
 
     public static String CARACTERE_INVALIDO = "caractere invalido";
