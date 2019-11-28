@@ -7,6 +7,7 @@ Grupo:
 
 [Gustavo Lescowicz Kotarsky](https://github.com/gustavokotarsky)
 
+
 |   Parte|   Valor|  Nota|
 |-|-|-|
 |   Analise Léxica/Sintática| 10| 10|
