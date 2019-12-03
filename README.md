@@ -37,4 +37,4 @@ readln’(‘ id ’)’; |
  - __T__-> F {(*|and|/) F}
  - __F__-> ‘(‘ EXP ’)’| id | v_const | not F
 
-> Feito asté
+> Trabalho desenvolvido até a parte semântica.
