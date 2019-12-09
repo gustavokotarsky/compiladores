@@ -14,11 +14,11 @@ Grupo:
 |   Analise Semântica|  20| 20|
 
 
-#### Automato:
+### Automato:
 
 <img src="https://github.com/gustavokotarsky/compiladores/blob/master/Automato.jpg?raw=true">
 
-#### Gramática:
+### Gramática:
 
  - __S__-> {D}+ main {C}+end
  - __D__-> (integer | boolean | byte | string) id [= [-]v_const] {,id [= [-]v_const]}; |
